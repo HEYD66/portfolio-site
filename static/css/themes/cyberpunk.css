@@ -1,0 +1,673 @@
+/* 赛博朋克主题 */
+:root {
+    --primary-color: #ff006e;
+    --secondary-color: #3a86ff;
+    --background-color: #0f0e17;
+    --text-color: #fffffe;
+    --card-background: #1a192e;
+    --border-color: #ff006e;
+    --shadow-color: rgba(255, 0, 110, 0.5);
+    --header-background: linear-gradient(135deg, #0f0e17, #1a192e);
+    --accent-color: #3a86ff;
+}
+
+body {
+    background-color: var(--background-color);
+    color: var(--text-color);
+    font-family: 'Orbitron', sans-serif;
+    background-image: 
+        linear-gradient(rgba(58, 134, 255, 0.1) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(58, 134, 255, 0.1) 1px, transparent 1px);
+    background-size: 30px 30px;
+    position: relative;
+}
+
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: repeating-linear-gradient(
+        0deg,
+        transparent,
+        transparent 2px,
+        rgba(255, 0, 110, 0.1) 2px,
+        rgba(255, 0, 110, 0.1) 4px
+    );
+    pointer-events: none;
+    z-index: -1;
+}
+
+header {
+    background: var(--header-background);
+    border-bottom: 2px solid var(--border-color);
+    box-shadow: 0 0 30px var(--shadow-color);
+    position: relative;
+}
+
+header::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background: linear-gradient(90deg, var(--primary-color), var(--accent-color), var(--primary-color));
+    animation: cyberGlow 2s ease-in-out infinite alternate;
+}
+
+@keyframes cyberGlow {
+    from { opacity: 0.5; }
+    to { opacity: 1; }
+}
+
+nav {
+    background: #161529;
+    border-bottom: 1px solid var(--border-color);
+    box-shadow: 0 0 15px var(--shadow-color);
+}
+
+nav a {
+    color: var(--text-color);
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    position: relative;
+}
+
+nav a::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: var(--accent-color);
+    transition: width 0.3s ease;
+}
+
+nav a:hover {
+    color: var(--accent-color);
+    text-shadow: 0 0 10px var(--accent-color);
+}
+
+nav a:hover::after {
+    width: 100%;
+}
+
+.project-card {
+    background: var(--card-background);
+    border: 1px solid var(--border-color);
+    box-shadow: 0 0 20px var(--shadow-color);
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.project-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(58, 134, 255, 0.1), transparent);
+    transition: left 0.5s ease;
+}
+
+.project-card:hover::before {
+    left: 100%;
+}
+
+.project-card:hover {
+    transform: translateY(-5px) rotate(1deg);
+    box-shadow: 0 0 30px var(--shadow-color);
+    border-color: var(--accent-color);
+}
+
+.project-links a {
+    background: transparent;
+    color: var(--primary-color);
+    border: 1px solid var(--border-color);
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-size: 0.9rem;
+}
+
+.project-links a:hover {
+    background: var(--primary-color);
+    color: var(--background-color);
+    box-shadow: 0 0 15px var(--primary-color);
+    transform: scale(1.05);
+}
+
+.btn {
+    background: transparent;
+    color: var(--primary-color);
+    border: 1px solid var(--border-color);
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-size: 0.9rem;
+}
+
+.btn:hover {
+    background: var(--primary-color);
+    color: var(--background-color);
+    box-shadow: 0 0 15px var(--primary-color);
+    transform: scale(1.05);
+}
+
+input, textarea {
+    background: #161529;
+    color: var(--text-color);
+    border: 1px solid var(--border-color);
+    font-family: 'Orbitron', sans-serif;
+    transition: all 0.3s ease;
+}
+
+/* 确保表格文字清晰可见 */
+.projects-table th, .projects-table td {
+    color: var(--text-color);
+    background: var(--card-background);
+    font-family: 'Orbitron', sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* 确保模态框文字清晰可见 */
+.modal-content {
+    color: var(--text-color);
+    font-family: 'Orbitron', sans-serif;
+}
+
+/* 确保标签文字清晰可见 */
+.form-group label {
+    color: var(--text-color);
+    font-weight: bold;
+    font-family: 'Orbitron', sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* 赛博朋克主题下网站配置特定标签改为黑色 */
+.form-group label[for="site_title"],
+.form-group label[for="site_subtitle"],
+.form-group label[for="control_panel_visible"] span,
+.form-group label[for="music_enabled"] span,
+.form-group label[for="local_site_icon"],
+.form-group label[for="site_icon_url"],
+.form-group label[for="footer_text"] {
+    color: black !important;
+}
+
+/* 网站配置标题改为黑色 */
+.site-config-form h3 {
+    color: black !important;
+}
+
+/* 确保按钮文字清晰可见 */
+.btn {
+    font-family: 'Orbitron', sans-serif;
+}
+
+/* 确保项目管理标题清晰可见 */
+.admin-header h2 {
+    background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    display: inline-block;
+    font-family: 'Orbitron', sans-serif;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    border: 2px solid var(--border-color);
+    box-shadow: 0 0 15px var(--shadow-color);
+    animation: cyberGlow 2s ease-in-out infinite alternate;
+}
+
+/* 确保下拉菜单文字清晰可见 */
+select {
+    color: var(--text-color);
+    background: var(--card-background);
+    border: 1px solid var(--border-color);
+}
+
+select option {
+    background: var(--card-background);
+    color: var(--text-color);
+    font-family: 'Orbitron', sans-serif;
+}
+
+input:focus, textarea:focus {
+    outline: none;
+    box-shadow: 0 0 15px var(--accent-color);
+    border-color: var(--accent-color);
+}
+
+.modal-content {
+    background: var(--card-background);
+    border: 2px solid var(--border-color);
+    box-shadow: 0 0 30px var(--shadow-color);
+    position: relative;
+}
+
+.modal-content::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: linear-gradient(90deg, var(--primary-color), var(--accent-color), var(--primary-color));
+    animation: cyberGlow 2s ease-in-out infinite alternate;
+}
+
+.close {
+    color: var(--primary-color);
+    transition: all 0.3s ease;
+    font-size: 2rem;
+    position: absolute;
+    top: 0;
+    right: 1rem;
+}
+
+.close:hover {
+    color: var(--accent-color);
+    text-shadow: 0 0 15px var(--accent-color);
+    transform: rotate(90deg);
+}
+
+footer {
+    background: var(--header-background);
+    border-top: 2px solid var(--border-color);
+    box-shadow: 0 0 30px var(--shadow-color);
+    position: relative;
+}
+
+footer::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background: linear-gradient(90deg, var(--primary-color), var(--accent-color), var(--primary-color));
+    animation: cyberGlow 2s ease-in-out infinite alternate;
+}
+
+/* 移动端适配 - 赛博朋克主题 */
+@media (max-width: 768px) {
+    /* 容器内边距调整 */
+    .container {
+        padding: 1rem;
+    }
+    
+    /* 导航栏优化 */
+    nav {
+        padding: 0.5rem 0;
+        text-align: center;
+        flex-direction: column;
+        gap: 1rem;
+    }
+    
+    nav a {
+        display: inline-block;
+        margin: 0 0.5rem;
+        padding: 0.3rem 0.6rem;
+        font-size: 0.9rem;
+    }
+    
+    /* 项目卡片优化 */
+    .project-card {
+        margin: 0 auto;
+        width: 100%;
+    }
+    
+    /* 项目详情弹窗优化 */
+    .project-modal-content {
+        width: 95% !important;
+        margin: 5% auto !important;
+        padding: 1rem !important;
+    }
+    
+    .project-modal-close {
+        font-size: 2rem !important;
+        width: 35px !important;
+        height: 35px !important;
+        right: 0.5rem !important;
+        top: 0.3rem !important;
+    }
+    
+    /* 模态框优化 */
+    .modal-content {
+        width: 95% !important;
+        margin: 10% auto !important;
+        padding: 1rem !important;
+    }
+    
+    /* 表格优化 */
+    .projects-table {
+        font-size: 0.9rem;
+    }
+    
+    .projects-table th, .projects-table td {
+        padding: 0.5rem;
+        max-width: 200px;
+        font-size: 0.8rem;
+    }
+    
+    /* 标题字体大小调整 */
+    h1 {
+        font-size: 1.8rem;
+    }
+    
+    h2 {
+        font-size: 1.5rem;
+    }
+    
+    h3 {
+        font-size: 1.3rem;
+    }
+    
+    /* 按钮优化 */
+    .btn, .project-links a {
+        padding: 0.5rem 1rem;
+        font-size: 0.85rem;
+    }
+    
+    /* 表单元素优化 */
+    input, textarea, select {
+        font-size: 0.9rem;
+        padding: 0.5rem;
+    }
+    
+    /* 音乐控制面板优化 */
+    header > div {
+        position: relative !important;
+        top: 0 !important;
+        right: 0 !important;
+        margin-top: 1rem;
+        background: rgba(0, 0, 0, 0.8) !important;
+    }
+    
+    /* 搜索框和分类按钮优化 */
+    nav > div {
+        margin: 0 !important;
+    }
+    
+    .search-container {
+        width: 100% !important;
+    }
+    
+    .search-container input {
+        width: calc(100% - 80px) !important;
+    }
+    
+    /* 分类列表优化 */
+    .categories-list {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 0.5rem;
+    }
+    
+    /* 搜索容器优化 */
+    nav > form {
+        width: 100%;
+        justify-content: center;
+    }
+    
+    /* 项目管理标题优化 */
+    .admin-header h2 {
+        font-size: 1.4rem;
+        padding: 0.4rem 0.8rem;
+    }
+    
+    /* 操作按钮容器优化 */
+    .actions {
+        flex-direction: column;
+        gap: 0.3rem;
+    }
+}
+
+/* 项目详情弹窗样式 - 赛博朋克主题：显示屏形式 */
+.project-modal {
+    background-color: rgba(0, 0, 0, 0.9) !important;
+    background-image: 
+        linear-gradient(rgba(58, 134, 255, 0.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(58, 134, 255, 0.05) 1px, transparent 1px) !important;
+    background-size: 30px 30px !important;
+}
+
+.project-modal-content {
+    background: var(--card-background) !important;
+    border: 3px solid var(--border-color) !important;
+    border-radius: 5px !important;
+    box-shadow: 
+        0 0 50px var(--shadow-color),
+        inset 0 0 20px rgba(0, 0, 0, 0.5),
+        0 0 0 5px rgba(255, 0, 110, 0.2) inset !important;
+    position: relative !important;
+    background-image: 
+        linear-gradient(rgba(58, 134, 255, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(58, 134, 255, 0.03) 1px, transparent 1px) !important;
+    background-size: 20px 20px !important;
+}
+
+.project-modal-content::before {
+    content: '' !important;
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+    height: 8px !important;
+    background: linear-gradient(90deg, var(--primary-color), var(--accent-color), var(--primary-color)) !important;
+    animation: cyberGlow 2s ease-in-out infinite alternate !important;
+    z-index: 10 !important;
+}
+
+.project-modal-content::after {
+    content: '' !important;
+    position: absolute !important;
+    bottom: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+    height: 4px !important;
+    background: linear-gradient(90deg, var(--primary-color), var(--accent-color), var(--primary-color)) !important;
+    animation: cyberGlow 2s ease-in-out infinite alternate !important;
+    z-index: 10 !important;
+}
+
+.project-modal-close {
+    color: var(--accent-color) !important;
+    font-size: 2.5rem !important;
+    text-shadow: 0 0 10px var(--accent-color) !important;
+    transition: all 0.3s ease !important;
+    position: absolute !important;
+    right: 1rem !important;
+    top: 0.5rem !important;
+    z-index: 20 !important;
+    background: rgba(26, 25, 46, 0.8) !important;
+    border: 1px solid var(--border-color) !important;
+    border-radius: 50% !important;
+    width: 40px !important;
+    height: 40px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    box-shadow: 0 0 15px var(--shadow-color) !important;
+}
+
+.project-modal-close:hover {
+    color: var(--primary-color) !important;
+    text-shadow: 0 0 15px var(--primary-color) !important;
+    transform: rotate(90deg) scale(1.1) !important;
+    box-shadow: 0 0 20px var(--shadow-color) !important;
+}
+
+/* 确保模态框内容元素样式一致 */
+#projectModalContent {
+    font-family: 'Orbitron', sans-serif !important;
+    color: var(--text-color) !important;
+}
+
+#projectModalContent h2 {
+    font-family: 'Orbitron', sans-serif !important;
+    color: var(--primary-color) !important;
+    text-shadow: 0 0 10px var(--primary-color) !important;
+    border-bottom: 2px solid var(--border-color) !important;
+    padding-bottom: 0.5rem !important;
+    margin-bottom: 1rem !important;
+    text-transform: uppercase !important;
+    letter-spacing: 2px !important;
+    background: linear-gradient(135deg, rgba(255, 0, 110, 0.1), rgba(58, 134, 255, 0.1)) !important;
+    padding: 1rem !important;
+    border-radius: 5px !important;
+}
+
+#projectModalContent h3 {
+    font-family: 'Orbitron', sans-serif !important;
+    color: var(--accent-color) !important;
+    text-shadow: 0 0 8px var(--accent-color) !important;
+    margin-top: 1.5rem !important;
+    margin-bottom: 0.8rem !important;
+    text-transform: uppercase !important;
+    letter-spacing: 1px !important;
+    font-size: 1.2rem !important;
+}
+
+#projectModalContent p {
+    font-family: 'Orbitron', sans-serif !important;
+    line-height: 1.8 !important;
+    margin-bottom: 1rem !important;
+    text-shadow: 0 0 5px rgba(58, 134, 255, 0.3) !important;
+}
+
+#projectModalContent a {
+    font-family: 'Orbitron', sans-serif !important;
+    background: transparent !important;
+    color: var(--primary-color) !important;
+    border: 1px solid var(--border-color) !important;
+    transition: all 0.3s ease !important;
+    text-transform: uppercase !important;
+    letter-spacing: 1px !important;
+    font-size: 0.9rem !important;
+    padding: 0.6rem 1.2rem !important;
+    border-radius: 3px !important;
+    box-shadow: 0 0 10px rgba(255, 0, 110, 0.3) !important;
+}
+
+#projectModalContent a:hover {
+    background: var(--primary-color) !important;
+    color: var(--background-color) !important;
+    box-shadow: 0 0 15px var(--primary-color) !important;
+    transform: scale(1.05) !important;
+}
+
+/* Portfolio v2 - cyber terminal */
+.portfolio-page .portfolio-shell {
+    background:
+        linear-gradient(135deg, rgba(255, 0, 110, 0.18), rgba(58, 134, 255, 0.16)),
+        var(--header-background);
+    color: var(--text-color);
+    border-bottom: 2px solid var(--primary-color);
+    box-shadow: 0 0 34px var(--shadow-color);
+}
+
+.portfolio-page .portfolio-shell::after {
+    content: "SYS.PORTFOLIO / ACTIVE";
+    position: absolute;
+    right: 2rem;
+    bottom: 1rem;
+    color: rgba(58, 134, 255, 0.45);
+    font-size: 0.8rem;
+    letter-spacing: 0.22em;
+}
+
+.portfolio-page .brand-mark__sig,
+.portfolio-page .ghost-link,
+.portfolio-page .quick-search,
+.portfolio-page .hero-metrics span,
+.portfolio-page .featured-project,
+.portfolio-page .case-card,
+.portfolio-page .empty-archive,
+.portfolio-page .project-modal-content,
+.portfolio-page .music-dock {
+    background: rgba(26, 25, 46, 0.92);
+    color: var(--text-color);
+    border: 1px solid var(--primary-color);
+    box-shadow: 0 0 20px rgba(255, 0, 110, 0.28);
+}
+
+.portfolio-page .quick-search input {
+    background: #10101f;
+    color: var(--text-color);
+    border: 1px solid var(--accent-color);
+}
+
+.portfolio-page .quick-search button,
+.portfolio-page .case-card__actions button,
+.portfolio-page .empty-archive a,
+.portfolio-page .modal-case__links a {
+    background: var(--primary-color);
+    color: #0f0e17;
+    border: 1px solid var(--primary-color);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+}
+
+.portfolio-page .eyebrow,
+.portfolio-page .section-kicker,
+.portfolio-page .case-card__topline {
+    color: var(--accent-color);
+    text-shadow: 0 0 10px var(--accent-color);
+}
+
+.portfolio-page .featured-project__label,
+.portfolio-page .filter-chip.is-active {
+    background: var(--primary-color);
+    color: #0f0e17;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 16px rgba(255, 0, 110, 0.5);
+}
+
+.portfolio-page .featured-project__meta {
+    background: linear-gradient(180deg, transparent, rgba(15, 14, 23, 0.92));
+}
+
+.portfolio-page .filter-rack {
+    border-bottom: 1px solid var(--primary-color);
+}
+
+.portfolio-page .filter-chip {
+    background: #161529;
+    color: var(--text-color);
+    border: 1px solid var(--accent-color);
+}
+
+.portfolio-page .case-card {
+    border-top: 4px solid var(--accent-color);
+}
+
+.portfolio-page .case-card__media {
+    background:
+        linear-gradient(rgba(58,134,255,0.1) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,0,110,0.1) 1px, transparent 1px),
+        #111124;
+    background-size: 18px 18px;
+}
+
+.portfolio-page .case-card__actions a {
+    background: transparent;
+    color: var(--accent-color);
+    border: 1px solid var(--accent-color);
+}
+
+.portfolio-page .image-modal,
+.portfolio-page .project-modal {
+    background: rgba(0, 0, 0, 0.9);
+}
