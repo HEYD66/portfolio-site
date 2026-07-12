@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>登录 - 作品管理控制台</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+    <link rel="stylesheet" id="theme-style" href="/static/css/themes/fresh.css">
+</head>
+<body>
+    <div style="display: flex; justify-content: center; align-items: center; min-height: 100vh;">
+        <div style="background: white; padding: 2rem; border-radius: 8px; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); width: 100%; max-width: 400px;">
+            <h2 style="text-align: center; margin-bottom: 1.5rem;">作品管理控制台</h2>
+            <h3 style="text-align: center; margin-bottom: 1.5rem; color: #666;">登录</h3>
+            
+            {% if error %}
+            <div style="background: #f8d7da; color: #721c24; padding: 1rem; border-radius: 4px; margin-bottom: 1rem;">
+                {{ error }}
+            </div>
+            {% endif %}
+            
+            <form method="POST" action="/login">
+                <div class="form-group">
+                    <label for="password">密码</label>
+                    <input type="password" id="password" name="password" required>
+                </div>
+                <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 1rem;">登录</button>
+            </form>
+        </div>
+    </div>
+    
+    <script>
+        // 从服务器获取主题
+        async function fetchAndApplyTheme() {
+            try {
+                const response = await fetch('/api/site-config');
+                if (response.ok) {
+                    const config = await response.json();
+                    const themeStyle = document.getElementById('theme-style');
+                    themeStyle.href = `/static/css/themes/${config.theme}.css`;
+                }
+            } catch (error) {
+                console.error('获取主题失败:', error);
+            }
+        }
+        
+        // 页面加载时从服务器获取主题
+        document.addEventListener('DOMContentLoaded', fetchAndApplyTheme);
+    </script>
+</body>
+</html>
