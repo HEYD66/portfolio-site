@@ -1,0 +1,47 @@
+# Python
+__pycache__/
+venv/
+.venv/
+*.pyc
+*.pyo
+*.pyd
+.Python
+.env
+
+# Database
+instance/
+*.db
+*.sqlite
+*.sqlite3
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+logs/
+*.log
+
+# Build
+build/
+dist/
+*.spec
+*.exe
+
+# Temporary files
+.docker-test/
+*.tmp
+*.temp
+
+# User uploaded runtime assets
+static/uploads/
+
+# Documentation
+*.md.bak
+*.rst.bak
