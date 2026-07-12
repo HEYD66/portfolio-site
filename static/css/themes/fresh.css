@@ -1,0 +1,372 @@
+/* 清新主题 */
+:root {
+    --primary-color: #4CAF50;
+    --secondary-color: #2196F3;
+    --background-color: #f8f9fa;
+    --text-color: #333333;
+    --card-background: #ffffff;
+    --border-color: #e0e0e0;
+    --shadow-color: rgba(0, 0, 0, 0.1);
+    --header-background: linear-gradient(135deg, #4CAF50, #2196F3);
+    --accent-color: #FF9800;
+}
+
+/* Portfolio v2 - fresh garden glass */
+.portfolio-page .portfolio-shell {
+    background:
+        linear-gradient(135deg, rgba(76, 175, 80, 0.92), rgba(33, 150, 243, 0.84)),
+        radial-gradient(circle at 80% 20%, rgba(255, 255, 255, 0.28), transparent 34%);
+    color: white;
+    border: 0;
+    box-shadow: 0 18px 45px rgba(33, 150, 243, 0.22);
+}
+
+.portfolio-page .portfolio-shell::after {
+    content: "";
+    position: absolute;
+    right: 8%;
+    bottom: -80px;
+    width: 320px;
+    height: 320px;
+    border: 1px solid rgba(255, 255, 255, 0.28);
+    border-radius: 50%;
+    background: repeating-radial-gradient(circle, rgba(255,255,255,0.16) 0 2px, transparent 2px 18px);
+}
+
+.portfolio-page .brand-mark__sig,
+.portfolio-page .ghost-link,
+.portfolio-page .quick-search {
+    border: 1px solid rgba(255, 255, 255, 0.32);
+    border-radius: 18px;
+    background: rgba(255, 255, 255, 0.12);
+}
+
+.portfolio-page .quick-search input {
+    border: 0;
+    border-radius: 14px;
+}
+
+.portfolio-page .quick-search button,
+.portfolio-page .case-card__actions button,
+.portfolio-page .empty-archive a,
+.portfolio-page .modal-case__links a {
+    background: var(--primary-color);
+    color: white;
+    border: 0;
+    border-radius: 999px;
+}
+
+.portfolio-page .hero-metrics span,
+.portfolio-page .featured-project,
+.portfolio-page .case-card,
+.portfolio-page .empty-archive,
+.portfolio-page .project-modal-content,
+.portfolio-page .music-dock {
+    background: rgba(255, 255, 255, 0.92);
+    color: var(--text-color);
+    border: 1px solid rgba(76, 175, 80, 0.18);
+    border-radius: 22px;
+    box-shadow: 0 14px 35px rgba(33, 150, 243, 0.13);
+}
+
+.portfolio-page .featured-project {
+    background: #eaf8ef;
+}
+
+.portfolio-page .featured-project__label,
+.portfolio-page .filter-chip.is-active {
+    background: var(--accent-color);
+    color: white;
+    border-color: var(--accent-color);
+}
+
+.portfolio-page .featured-project__meta {
+    background: linear-gradient(180deg, transparent, rgba(255, 255, 255, 0.92));
+}
+
+.portfolio-page .filter-rack {
+    border-bottom: 1px solid rgba(76, 175, 80, 0.2);
+}
+
+.portfolio-page .filter-chip {
+    background: white;
+    border: 1px solid var(--border-color);
+    border-radius: 999px;
+}
+
+.portfolio-page .case-card {
+    border-top: 5px solid var(--primary-color);
+}
+
+.portfolio-page .case-card__media {
+    background: linear-gradient(135deg, rgba(76, 175, 80, 0.12), rgba(33, 150, 243, 0.12));
+    border-radius: 18px 0 0 18px;
+}
+
+.portfolio-page .case-card__actions a {
+    background: transparent;
+    color: var(--secondary-color);
+    border: 1px solid rgba(33, 150, 243, 0.28);
+    border-radius: 999px;
+}
+
+.portfolio-page .image-modal,
+.portfolio-page .project-modal {
+    background: rgba(20, 55, 65, 0.72);
+}
+
+.portfolio-page .portfolio-footer {
+    background: linear-gradient(135deg, #4CAF50, #2196F3);
+    color: white;
+}
+
+body {
+    background-color: var(--background-color);
+    color: var(--text-color);
+    font-family: 'Arial', sans-serif;
+    background-image: 
+        radial-gradient(circle at 1px 1px, rgba(76, 175, 80, 0.1) 1px, transparent 0);
+    background-size: 20px 20px;
+}
+
+header {
+    background: var(--header-background);
+    color: white;
+    box-shadow: 0 2px 10px var(--shadow-color);
+    border: none;
+}
+
+nav {
+    background: white;
+    border-bottom: 1px solid var(--border-color);
+    box-shadow: 0 2px 5px var(--shadow-color);
+}
+
+nav a {
+    color: var(--text-color);
+    transition: all 0.3s ease;
+}
+
+nav a:hover {
+    color: var(--primary-color);
+    background: rgba(76, 175, 80, 0.1);
+}
+
+.project-card {
+    background: var(--card-background);
+    border: 1px solid var(--border-color);
+    box-shadow: 0 2px 10px var(--shadow-color);
+    transition: all 0.3s ease;
+    border-radius: 12px;
+}
+
+.project-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 20px var(--shadow-color);
+}
+
+.project-links a {
+    background: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: 20px;
+    transition: all 0.3s ease;
+}
+
+.project-links a:hover {
+    background: var(--secondary-color);
+    transform: scale(1.05);
+    box-shadow: 0 2px 10px var(--shadow-color);
+}
+
+.btn {
+    background: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: 20px;
+    transition: all 0.3s ease;
+}
+
+.btn:hover {
+    background: var(--secondary-color);
+    transform: scale(1.05);
+    box-shadow: 0 2px 10px var(--shadow-color);
+}
+
+input, textarea {
+    background: white;
+    color: var(--text-color);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
+
+input:focus, textarea:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.1);
+    border-color: var(--primary-color);
+}
+
+.modal-content {
+    background: var(--card-background);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    box-shadow: 0 5px 30px var(--shadow-color);
+}
+
+.close {
+    color: #999;
+    transition: all 0.3s ease;
+}
+
+.close:hover {
+    color: var(--primary-color);
+    transform: rotate(90deg);
+}
+
+.projects-table th {
+    background: linear-gradient(135deg, #4CAF50, #2196F3);
+    color: white;
+    border: none;
+}
+
+.projects-table td {
+    border: 1px solid var(--border-color);
+}
+
+.projects-table tr:hover {
+    background: rgba(76, 175, 80, 0.05);
+}
+
+/* 移动端适配 - 清新主题 */
+@media (max-width: 768px) {
+    /* 容器内边距调整 */
+    .container {
+        padding: 1rem;
+    }
+    
+    /* 导航栏优化 */
+    nav {
+        padding: 0.5rem 0;
+        text-align: center;
+        flex-direction: column;
+        gap: 1rem;
+    }
+    
+    nav a {
+        display: inline-block;
+        margin: 0 0.5rem;
+        padding: 0.3rem 0.6rem;
+        font-size: 0.9rem;
+    }
+    
+    /* 项目卡片优化 */
+    .project-card {
+        margin: 0 auto;
+        width: 100%;
+        margin-bottom: 1rem;
+    }
+    
+    /* 项目详情弹窗优化 */
+    .project-modal-content {
+        width: 95% !important;
+        margin: 5% auto !important;
+        padding: 1rem !important;
+    }
+    
+    .project-modal-close {
+        font-size: 2rem !important;
+        right: 0.5rem !important;
+        top: 0.3rem !important;
+    }
+    
+    /* 模态框优化 */
+    .modal-content {
+        width: 95% !important;
+        margin: 10% auto !important;
+        padding: 1rem !important;
+    }
+    
+    /* 表格优化 */
+    .projects-table {
+        font-size: 0.9rem;
+    }
+    
+    .projects-table th, .projects-table td {
+        padding: 0.5rem;
+        max-width: 200px;
+        font-size: 0.8rem;
+    }
+    
+    /* 标题字体大小调整 */
+    h1 {
+        font-size: 1.8rem;
+    }
+    
+    h2 {
+        font-size: 1.5rem;
+    }
+    
+    h3 {
+        font-size: 1.3rem;
+    }
+    
+    /* 按钮优化 */
+    .btn, .project-links a {
+        padding: 0.5rem 1rem;
+        font-size: 0.85rem;
+    }
+    
+    /* 表单元素优化 */
+    input, textarea, select {
+        font-size: 0.9rem;
+        padding: 0.5rem;
+    }
+    
+    /* 音乐控制面板优化 */
+    header > div {
+        position: relative !important;
+        top: 0 !important;
+        right: 0 !important;
+        margin-top: 1rem;
+        background: rgba(0, 0, 0, 0.8) !important;
+    }
+    
+    /* 搜索框和分类按钮优化 */
+    nav > div {
+        margin: 0 !important;
+    }
+    
+    .search-container {
+        width: 100% !important;
+    }
+    
+    .search-container input {
+        width: calc(100% - 80px) !important;
+    }
+    
+    /* 分类列表优化 */
+    .categories-list {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 0.5rem;
+    }
+    
+    /* 搜索容器优化 */
+    nav > form {
+        width: 100%;
+        justify-content: center;
+    }
+    
+    /* 项目管理标题优化 */
+    .admin-header h2 {
+        font-size: 1.4rem;
+        padding: 0.4rem 0.8rem;
+    }
+    
+    /* 操作按钮容器优化 */
+    .actions {
+        flex-direction: column;
+        gap: 0.3rem;
+    }
+}
