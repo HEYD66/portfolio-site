@@ -1,0 +1,1296 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background-color: #f4f4f4;
+}
+
+header {
+    background: #333;
+    color: #fff;
+    padding: 1rem 0;
+    text-align: center;
+}
+
+header h1 {
+    margin-bottom: 0.5rem;
+}
+
+nav {
+    background: #444;
+    padding: 0.5rem;
+    text-align: center;
+}
+
+nav a {
+    color: #fff;
+    text-decoration: none;
+    margin: 0 1rem;
+    padding: 0.5rem;
+}
+
+nav a:hover {
+    background: #555;
+    border-radius: 5px;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+.projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.project-card {
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    transition: transform 0.3s ease;
+}
+
+.project-card:hover {
+    transform: translateY(-5px);
+}
+
+.project-card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+
+.project-info {
+    padding: 1.5rem;
+}
+
+.project-info h3 {
+    margin-bottom: 0.5rem;
+    color: #333;
+}
+
+.project-info p {
+    margin-bottom: 1rem;
+    color: #666;
+}
+
+.project-links {
+    display: flex;
+    gap: 1rem;
+}
+
+.project-links a {
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    background: #333;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 4px;
+    transition: background 0.3s ease;
+}
+
+.project-links a:hover {
+    background: #555;
+}
+
+footer {
+    background: #333;
+    color: #fff;
+    text-align: center;
+    padding: 1rem 0;
+    margin-top: 2rem;
+}
+
+/* Admin styles */
+.admin-container {
+    max-width: 800px;
+    margin: 0 auto;
+    background: #fff;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.admin-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+}
+
+.btn {
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    background: #333;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 4px;
+    border: none;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.btn:hover {
+    background: #555;
+}
+
+.btn-primary {
+    background: #007bff;
+}
+
+.btn-primary:hover {
+    background: #0056b3;
+}
+
+.btn-danger {
+    background: #dc3545;
+}
+
+.btn-danger:hover {
+    background: #c82333;
+}
+
+.btn-success {
+    background: #28a745;
+}
+
+.btn-success:hover {
+    background: #218838;
+}
+
+.form-group {
+    margin-bottom: 1rem;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: bold;
+}
+
+.form-group input, .form-group textarea {
+    width: 100%;
+    padding: 0.5rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 1rem;
+}
+
+.form-group textarea {
+    resize: vertical;
+    min-height: 100px;
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.modal.show {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal-content {
+    background-color: #fff;
+    margin: 10% auto;
+    padding: 2rem;
+    border: 1px solid #888;
+    width: 80%;
+    max-width: 500px;
+    border-radius: 8px;
+    position: relative;
+    max-height: 80vh;
+    overflow-y: auto;
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+    position: absolute;
+    right: 1rem;
+    top: 0.5rem;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.projects-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 2rem;
+}
+
+.projects-table th, .projects-table td {
+    border: 1px solid #ddd;
+    padding: 0.8rem;
+    text-align: left;
+    overflow-wrap: break-word;
+    max-width: 300px;
+}
+
+/* 波形图动画 */
+@keyframes wave {
+    0%, 100% {
+        height: 20%;
+    }
+    50% {
+        height: 100%;
+    }
+}
+
+/* 移动端适配 */
+@media (max-width: 768px) {
+    /* 容器内边距调整 */
+    .container {
+        padding: 1rem;
+    }
+    
+    /* 导航栏优化 */
+    nav {
+        padding: 0.5rem 0;
+        text-align: center;
+    }
+    
+    nav a {
+        display: inline-block;
+        margin: 0 0.5rem;
+        padding: 0.3rem 0.6rem;
+        font-size: 0.9rem;
+    }
+    
+    /* 项目网格优化 */
+    .projects-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+        margin-top: 1rem;
+    }
+    
+    /* 项目卡片优化 */
+    .project-card img {
+        height: 180px;
+    }
+    
+    .project-info {
+        padding: 1rem;
+    }
+    
+    .project-links {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+    
+    .project-links a {
+        width: 100%;
+        text-align: center;
+    }
+    
+    /* 标题字体大小调整 */
+    h1 {
+        font-size: 1.8rem;
+    }
+    
+    h2 {
+        font-size: 1.5rem;
+    }
+    
+    h3 {
+        font-size: 1.3rem;
+    }
+    
+    /* 音乐控制面板优化 */
+    header > div {
+        position: relative !important;
+        top: 0 !important;
+        right: 0 !important;
+        margin-top: 1rem;
+        background: rgba(0, 0, 0, 0.8) !important;
+    }
+    
+    #audio-waveform {
+        width: 80px !important;
+    }
+    
+    /* 搜索框和分类按钮优化 */
+    nav {
+        flex-direction: column;
+        gap: 1rem;
+    }
+    
+    nav > div {
+        margin: 0 !important;
+    }
+    
+    .search-container {
+        width: 100% !important;
+    }
+    
+    .search-container input {
+        width: calc(100% - 80px) !important;
+    }
+    
+    /* 模态框优化 */
+    .modal-content {
+        width: 95% !important;
+        margin: 10% auto !important;
+        padding: 1rem !important;
+    }
+    
+    .project-modal-content {
+        width: 95% !important;
+        margin: 5% auto !important;
+        padding: 1rem !important;
+    }
+    
+    /* 表格优化 */
+    .projects-table {
+        font-size: 0.9rem;
+    }
+    
+    .projects-table th, .projects-table td {
+        padding: 0.5rem;
+    }
+    
+    .actions {
+        flex-direction: column;
+        gap: 0.3rem;
+    }
+    
+    /* 图像放大模态框优化 */
+    .image-modal-content {
+        max-width: 95%;
+        max-height: 95%;
+    }
+    
+    /* 分类列表优化 */
+    .categories-list {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 0.5rem;
+    }
+    
+    /* 搜索容器优化 */
+    nav > form {
+        width: 100%;
+        justify-content: center;
+    }
+}
+
+/* 图像放大模态框样式 */
+.image-modal {
+    display: none;
+    position: fixed;
+    z-index: 2000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.9);
+}
+
+.image-modal-content {
+    margin: auto;
+    display: block;
+    max-width: 90%;
+    max-height: 90%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.image-modal-close {
+    position: absolute;
+    top: 15px;
+    right: 35px;
+    color: white;
+    font-size: 40px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.image-modal-close:hover {
+    color: #ccc;
+}
+
+.projects-table th {
+    background-color: #f2f2f2;
+    font-weight: bold;
+}
+
+.actions {
+    display: flex;
+    gap: 0.5rem;
+}
+
+/* Polished admin/application surfaces */
+:root {
+    --surface-color: #ffffff;
+    --muted-surface: #f7f8fa;
+    --line-color: #dfe3e8;
+    --soft-shadow: 0 10px 28px rgba(22, 30, 46, 0.08);
+}
+
+.admin-container {
+    max-width: 1100px;
+    background: var(--surface-color);
+    border: 1px solid var(--line-color);
+    box-shadow: var(--soft-shadow);
+}
+
+.tab-container {
+    gap: 0.25rem;
+    overflow-x: auto;
+    scrollbar-width: thin;
+}
+
+.tab-btn {
+    white-space: nowrap;
+    border-radius: 6px 6px 0 0;
+}
+
+.projects-table {
+    border: 1px solid var(--line-color);
+    border-radius: 8px;
+    border-collapse: separate;
+    border-spacing: 0;
+    overflow: hidden;
+}
+
+.projects-table th,
+.projects-table td {
+    border-width: 0 0 1px 0;
+    border-color: var(--line-color);
+    vertical-align: middle;
+}
+
+.projects-table tbody tr:last-child td {
+    border-bottom: 0;
+}
+
+.projects-table tbody tr:hover {
+    background: var(--muted-surface);
+}
+
+.empty-state {
+    color: #6b7280;
+    text-align: center;
+    padding: 2rem !important;
+}
+
+.btn {
+    min-height: 36px;
+    border-radius: 6px;
+    font-weight: 600;
+}
+
+.form-group input,
+.form-group textarea,
+.form-group select {
+    width: 100%;
+    min-height: 40px;
+    padding: 0.6rem 0.7rem;
+    border: 1px solid var(--line-color);
+    border-radius: 6px;
+    font-size: 1rem;
+    background: #fff;
+}
+
+.form-group input:focus,
+.form-group textarea:focus,
+.form-group select:focus {
+    outline: 2px solid rgba(0, 123, 255, 0.18);
+    border-color: #6aa8ff;
+}
+
+.modal-content {
+    border: 0;
+    box-shadow: 0 24px 60px rgba(0, 0, 0, 0.22);
+}
+
+.project-card {
+    border: 1px solid var(--line-color);
+}
+
+.project-info h3,
+.project-info p {
+    overflow-wrap: anywhere;
+}
+
+@media (max-width: 768px) {
+    .admin-container {
+        padding: 1rem;
+        border-radius: 0;
+        box-shadow: none;
+    }
+
+    .admin-header > div {
+        flex-wrap: wrap;
+        justify-content: flex-start !important;
+    }
+
+    .projects-table {
+        display: block;
+        overflow-x: auto;
+        white-space: nowrap;
+    }
+
+    .actions {
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
+
+    .btn {
+        padding: 0.55rem 0.75rem;
+    }
+}
+
+/* Portfolio v2 shared layout */
+.portfolio-page {
+    min-height: 100vh;
+}
+
+.portfolio-page a {
+    color: inherit;
+}
+
+.portfolio-page button,
+.portfolio-page input,
+.portfolio-page textarea,
+.portfolio-page select {
+    font: inherit;
+}
+
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+.portfolio-page .portfolio-shell {
+    position: relative;
+    overflow: hidden;
+    padding: 0 max(1.25rem, calc((100vw - 1180px) / 2 + 1.25rem)) 3rem;
+    text-align: left;
+}
+
+.portfolio-page .portfolio-topbar {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 1.1rem 0;
+    background: transparent;
+    border: 0;
+    box-shadow: none;
+    text-align: left;
+}
+
+.portfolio-page .brand-mark {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    min-width: 0;
+    margin: 0;
+    padding: 0;
+    text-decoration: none;
+}
+
+.portfolio-page .brand-mark__sig {
+    display: grid;
+    place-items: center;
+    width: 42px;
+    height: 42px;
+    border: 2px solid currentColor;
+    font-size: 1.25rem;
+    font-weight: 800;
+}
+
+.portfolio-page .brand-mark strong,
+.portfolio-page .brand-mark small {
+    display: block;
+}
+
+.portfolio-page .brand-mark strong {
+    max-width: 280px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-size: 0.98rem;
+}
+
+.portfolio-page .brand-mark small {
+    opacity: 0.72;
+    font-size: 0.74rem;
+}
+
+.portfolio-page .topbar-actions {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.portfolio-page .ghost-link {
+    margin: 0;
+    padding: 0.62rem 0.85rem;
+    text-decoration: none;
+}
+
+.portfolio-page .quick-search {
+    display: flex;
+    align-items: center;
+    gap: 0.45rem;
+    padding: 0.25rem;
+}
+
+.portfolio-page .quick-search input {
+    width: 230px;
+    min-height: 38px;
+    padding: 0 0.78rem;
+}
+
+.portfolio-page .quick-search button,
+.portfolio-page .case-card__actions button,
+.portfolio-page .case-card__actions a,
+.portfolio-page .empty-archive a,
+.portfolio-page .modal-case__links a,
+.portfolio-page .music-dock button {
+    min-height: 38px;
+    padding: 0.62rem 0.9rem;
+    cursor: pointer;
+    font-weight: 700;
+    text-decoration: none;
+}
+
+.portfolio-page .hero-stage {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    grid-template-columns: minmax(0, 1.1fr) minmax(320px, 0.72fr);
+    gap: 2rem;
+    align-items: end;
+    padding-top: 2.3rem;
+}
+
+.portfolio-page .eyebrow,
+.portfolio-page .section-kicker {
+    margin: 0 0 0.75rem;
+    font-size: 0.76rem;
+    font-weight: 800;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+}
+
+.portfolio-page .hero-copy h1 {
+    max-width: 760px;
+    margin: 0;
+    font-size: 4rem;
+    line-height: 0.98;
+    font-weight: 900;
+}
+
+.portfolio-page .hero-subtitle {
+    max-width: 670px;
+    margin-top: 1.1rem;
+    font-size: 1.08rem;
+}
+
+.portfolio-page .hero-metrics {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-top: 1.6rem;
+}
+
+.portfolio-page .hero-metrics span {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 0.45rem;
+    padding: 0.65rem 0.85rem;
+}
+
+.portfolio-page .hero-metrics strong {
+    font-size: 1.45rem;
+}
+
+.portfolio-page .featured-project {
+    display: grid;
+    width: 100%;
+    height: clamp(320px, 42vw, 430px);
+    min-height: 0;
+    padding: 0;
+    overflow: hidden;
+    text-align: left;
+    cursor: pointer;
+}
+
+.portfolio-page .featured-project:not(.is-active) {
+    display: none;
+}
+
+.portfolio-page .featured-project img,
+.portfolio-page .featured-project video,
+.portfolio-page .featured-project__placeholder {
+    grid-area: 1 / 1;
+    width: 100%;
+    min-height: 0;
+}
+
+.portfolio-page .featured-project img,
+.portfolio-page .featured-project video {
+    height: 100%;
+    object-fit: cover;
+}
+
+.portfolio-page .featured-project video,
+.portfolio-page .case-card__media video {
+    pointer-events: none;
+}
+
+.portfolio-page .featured-project__placeholder {
+    display: grid;
+    place-items: center;
+    font-size: 8rem;
+    font-weight: 800;
+}
+
+.portfolio-page .featured-project__label,
+.portfolio-page .featured-project__meta {
+    grid-area: 1 / 1;
+    z-index: 1;
+}
+
+.portfolio-page .featured-project__label {
+    align-self: start;
+    justify-self: start;
+    margin: 1rem;
+    padding: 0.32rem 0.55rem;
+    font-size: 0.72rem;
+    font-weight: 800;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+}
+
+.portfolio-page .featured-project__meta {
+    align-self: end;
+    padding: 1.2rem;
+}
+
+.portfolio-page .featured-project__meta strong,
+.portfolio-page .featured-project__meta small {
+    display: block;
+}
+
+.portfolio-page .featured-project__meta strong {
+    font-size: 1.55rem;
+    line-height: 1.18;
+}
+
+.portfolio-page .featured-controls {
+    position: absolute;
+    right: 0.85rem;
+    bottom: 0.85rem;
+    z-index: 3;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.35rem;
+    background: rgba(0, 0, 0, 0.45);
+    color: #fff;
+    backdrop-filter: blur(8px);
+}
+
+.portfolio-page .featured-controls button {
+    display: grid;
+    place-items: center;
+    width: 32px;
+    height: 32px;
+    border: 1px solid rgba(255, 255, 255, 0.35);
+    background: rgba(255, 255, 255, 0.12);
+    color: inherit;
+    cursor: pointer;
+    font-size: 1.35rem;
+    line-height: 1;
+}
+
+.portfolio-page .featured-controls span {
+    min-width: 48px;
+    text-align: center;
+    font-size: 0.78rem;
+    font-weight: 800;
+}
+
+.portfolio-page .portfolio-main {
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 2rem 1.25rem 3rem;
+}
+
+.portfolio-page .filter-rack {
+    display: grid;
+    grid-template-columns: minmax(180px, 0.35fr) minmax(0, 1fr);
+    gap: 1rem;
+    align-items: end;
+    margin-bottom: 1rem;
+    padding-bottom: 1.1rem;
+}
+
+.portfolio-page .filter-rack h2 {
+    margin: 0;
+    font-size: 1.7rem;
+    line-height: 1.1;
+}
+
+.portfolio-page .filter-chips {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    gap: 0.5rem;
+}
+
+.portfolio-page .filter-chip {
+    display: inline-flex;
+    align-items: center;
+    min-height: 36px;
+    margin: 0;
+    padding: 0.45rem 0.72rem;
+    text-decoration: none;
+}
+
+.portfolio-page .result-note {
+    margin: 0 0 1rem;
+}
+
+.portfolio-page .project-wall {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1rem;
+    align-items: start;
+    overflow-x: clip;
+}
+
+.portfolio-page .project-wall.is-masonry {
+    align-items: start;
+}
+
+.portfolio-page .project-wall__column {
+    display: grid;
+    gap: 1rem;
+    align-content: start;
+}
+
+.portfolio-page .project-wall.is-masonry .case-card {
+    grid-template-columns: minmax(150px, 0.42fr) minmax(0, 1fr);
+}
+
+.portfolio-page .case-card {
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+    display: grid;
+    grid-template-columns: minmax(150px, 0.48fr) minmax(0, 1fr);
+    min-height: 0;
+    align-self: start;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.portfolio-page .case-card:nth-child(3n + 2) {
+    grid-template-columns: 1fr;
+}
+
+.portfolio-page .case-card__media {
+    position: relative;
+    min-height: 0;
+    aspect-ratio: 16 / 10;
+    overflow: hidden;
+}
+
+.portfolio-page .case-card__media img,
+.portfolio-page .case-card__media video {
+    display: block;
+    width: 100%;
+    height: 100%;
+    min-height: 0;
+    object-fit: cover;
+}
+
+.portfolio-page .case-card__media span {
+    display: grid;
+    place-items: center;
+    height: 100%;
+    min-height: 0;
+    font-size: 6rem;
+    font-weight: 800;
+}
+
+.portfolio-page .case-card__video-badge {
+    position: absolute;
+    top: 0.75rem;
+    right: 0.75rem;
+    z-index: 1;
+    padding: 0.32rem 0.55rem;
+    font-size: 0.72rem;
+    font-style: normal;
+    font-weight: 800;
+    line-height: 1;
+    background: rgba(0, 0, 0, 0.72);
+    color: #fff;
+    border-radius: 999px;
+}
+
+.portfolio-page .case-card__video-placeholder {
+    font-size: 4.5rem;
+    line-height: 1;
+}
+
+.portfolio-page .case-card__body {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    padding: 1.15rem;
+}
+
+.portfolio-page .case-card__topline {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    font-size: 0.76rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+.portfolio-page .case-card h3 {
+    margin: 0.85rem 0 0.65rem;
+    font-size: 1.35rem;
+    line-height: 1.22;
+}
+
+.portfolio-page .case-card p {
+    overflow-wrap: anywhere;
+}
+
+.portfolio-page .case-card__description {
+    display: -webkit-box;
+    overflow: hidden;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+    line-height: 1.6;
+    max-height: 4.8em;
+    mask-image: linear-gradient(180deg, #000 68%, transparent 100%);
+}
+
+.portfolio-page .case-card__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: 1rem;
+    padding-top: 1rem;
+}
+
+.portfolio-page .case-card__actions a,
+.portfolio-page .case-card__actions button {
+    min-height: 34px;
+    padding: 0.5rem 0.72rem;
+    font-size: 0.88rem;
+}
+
+.portfolio-page .empty-archive {
+    grid-column: 1 / -1;
+    padding: 3rem;
+}
+
+.portfolio-page .portfolio-footer {
+    margin: 0;
+    padding: 1.4rem 1.25rem;
+    text-align: center;
+}
+
+.portfolio-page .music-dock {
+    position: fixed;
+    right: 1rem;
+    bottom: 1rem;
+    z-index: 800;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    max-width: min(420px, calc(100vw - 2rem));
+    padding: 0.7rem;
+}
+
+.portfolio-page .music-dock[hidden] {
+    display: none;
+}
+
+.portfolio-page .music-dock.is-collapsed {
+    width: auto;
+    max-width: none;
+    padding: 0;
+    border-radius: 999px;
+}
+
+.portfolio-page .music-dock__handle {
+    display: grid;
+    place-items: center;
+    flex: 0 0 auto;
+    width: 44px;
+    height: 44px;
+    min-height: 44px;
+    padding: 0;
+    border-radius: 999px;
+}
+
+.portfolio-page .music-dock__panel {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.portfolio-page .music-dock.is-collapsed .music-dock__panel {
+    display: none;
+}
+
+.portfolio-page .music-dock__track {
+    display: grid;
+    gap: 0.3rem;
+    min-width: 180px;
+}
+
+.portfolio-page .music-dock__track strong {
+    max-width: 220px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-size: 0.86rem;
+}
+
+.portfolio-page .image-modal,
+.portfolio-page .project-modal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 2000;
+}
+
+.portfolio-page .image-modal.is-open,
+.portfolio-page .project-modal.is-open {
+    display: grid;
+    place-items: center;
+}
+
+.portfolio-page .image-modal-content {
+    max-width: min(92vw, 1080px);
+    max-height: 88vh;
+    object-fit: contain;
+}
+
+.portfolio-page .image-modal-close,
+.portfolio-page .project-modal-close {
+    position: fixed;
+    top: 1rem;
+    right: 1rem;
+    z-index: 2;
+    width: 42px;
+    height: 42px;
+    cursor: pointer;
+    font-size: 1.7rem;
+    line-height: 1;
+}
+
+.portfolio-page .project-modal-content {
+    width: min(920px, calc(100vw - 2rem));
+    max-height: 88vh;
+    overflow-y: auto;
+    overflow-x: hidden;
+    overscroll-behavior: contain;
+}
+
+.portfolio-page .modal-case {
+    padding: 1.25rem;
+    max-width: 100%;
+    overflow-x: hidden;
+    overflow-wrap: anywhere;
+    word-break: break-word;
+}
+
+.portfolio-page .modal-case *,
+.portfolio-page #projectModalContent * {
+    min-width: 0;
+    max-width: 100%;
+    overflow-wrap: anywhere;
+    word-break: break-word;
+}
+
+.portfolio-page .modal-case img,
+.portfolio-page .modal-case__video {
+    display: block;
+    width: 100%;
+    margin-bottom: 1.25rem;
+}
+
+.portfolio-page .modal-case img {
+    max-height: 420px;
+    object-fit: cover;
+}
+
+.portfolio-page .modal-case__video {
+    height: auto;
+    max-height: min(72vh, 760px);
+    object-fit: contain;
+    background: #000;
+}
+
+.portfolio-page .modal-case h2 {
+    margin: 0 0 0.75rem;
+    font-size: 2rem;
+    line-height: 1.12;
+}
+
+.portfolio-page .modal-case__text {
+    margin-top: 1.2rem;
+    padding: 1rem;
+    overflow-wrap: anywhere;
+    word-break: break-word;
+}
+
+.portfolio-page .modal-case__lead {
+    overflow-wrap: anywhere;
+    word-break: break-word;
+}
+
+.portfolio-page .modal-case__links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.65rem;
+    margin-top: 1.2rem;
+    overflow-x: hidden;
+}
+
+@media (max-width: 940px) {
+    .portfolio-page .portfolio-topbar,
+    .portfolio-page .topbar-actions {
+        align-items: stretch;
+        flex-direction: column;
+    }
+
+    .portfolio-page .quick-search input {
+        width: 100%;
+    }
+
+    .portfolio-page .hero-stage,
+    .portfolio-page .filter-rack {
+        grid-template-columns: 1fr;
+    }
+
+    .portfolio-page .hero-copy h1 {
+        font-size: 2.6rem;
+    }
+
+    .portfolio-page .filter-chips {
+        justify-content: flex-start;
+    }
+
+    .portfolio-page .project-wall {
+        grid-template-columns: 1fr;
+        overflow-x: clip;
+    }
+
+    .portfolio-page .case-card,
+    .portfolio-page .case-card:nth-child(3n + 2) {
+        box-sizing: border-box;
+        max-width: 100%;
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 620px) {
+    .portfolio-page .portfolio-shell {
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
+
+    .portfolio-page .brand-mark strong {
+        max-width: 190px;
+    }
+
+    .portfolio-page .quick-search {
+        flex-direction: row;
+    }
+
+    .portfolio-page .quick-search button {
+        padding-left: 0.75rem;
+        padding-right: 0.75rem;
+    }
+
+    .portfolio-page .hero-copy h1 {
+        font-size: 2.15rem;
+    }
+
+    .portfolio-page .hero-metrics {
+        display: grid;
+        grid-template-columns: 1fr;
+    }
+
+    .portfolio-page .featured-project,
+    .portfolio-page .featured-project img,
+    .portfolio-page .featured-project video,
+    .portfolio-page .featured-project__placeholder {
+        min-height: 280px;
+    }
+
+    .portfolio-page .featured-controls {
+        right: 0.6rem;
+        bottom: 0.6rem;
+    }
+
+    .portfolio-page .portfolio-main {
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
+
+    .portfolio-page .case-card__actions {
+        display: grid;
+        grid-template-columns: 1fr;
+    }
+
+    .portfolio-page .music-dock {
+        left: 0.75rem;
+        right: 0.75rem;
+        bottom: 0.75rem;
+    }
+}
