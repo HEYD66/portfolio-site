@@ -1,0 +1,27 @@
+services:
+  portfolio:
+    build:
+      context: .
+    image: ${COMPOSE_PROJECT_NAME:-portfolio-site}:latest
+    container_name: ${CONTAINER_NAME:-portfolio-site}
+    init: true
+    restart: unless-stopped
+    ports:
+      - "${APP_PORT:-10008}:10008"
+    environment:
+      FLASK_ENV: production
+      SECRET_KEY: ${SECRET_KEY:-change-me-in-production}
+      UPLOAD_ROOT: /app/static/uploads
+      DATABASE_PATH: /app/static/uploads/portfolio_new.db
+      VIDEO_MAX_BYTES: ${VIDEO_MAX_BYTES:-1073741824}
+      MAX_UPLOAD_BYTES: ${MAX_UPLOAD_BYTES:-1090519040}
+      GUNICORN_CMD_ARGS: ${GUNICORN_CMD_ARGS:---workers 2 --timeout 180 --access-logfile - --error-logfile -}
+    volumes:
+      - ${UPLOADS_HOST_DIR:-./static/uploads}:/app/static/uploads
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://127.0.0.1:10008/', timeout=4).read()"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 10s
+    stop_grace_period: 20s
