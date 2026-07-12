@@ -1,0 +1,689 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>作品管理控制台</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+    <link rel="stylesheet" id="theme-style" href="/static/css/themes/{{ site_config.theme|default('fresh') }}.css">
+    {% if site_config and site_config.site_icon %}
+    <link rel="icon" href="{{ site_config.site_icon }}" type="image/x-icon">
+    <link rel="shortcut icon" href="{{ site_config.site_icon }}" type="image/x-icon">
+    {% endif %}
+</head>
+<body class="admin-page">
+    <header class="admin-hero">
+        <h1>作品管理控制台</h1>
+    </header>
+    
+    <nav class="admin-nav">
+        <a href="/">返回首页</a>
+        <a href="/admin">控制台</a>
+        <div style="display: inline-block;">
+            <select id="theme-select" onchange="changeTheme()" style="background: transparent; border: none; color: inherit; font-size: 1rem; cursor: pointer; margin: 0 1rem; padding: 0.5rem;">
+                <option value="fresh">清新风格</option>
+                <option value="professional">专业商务</option>
+                <option value="executive">高级专业</option>
+                <option value="cassette-futurism">磁带未来主义</option>
+                <option value="cyberpunk">赛博朋克</option>
+                <option value="comic">漫画风格</option>
+            </select>
+        </div>
+    </nav>
+    
+    <div class="container admin-container">
+        <!-- 标签页导航 -->
+        <div style="margin-bottom: 1rem;">
+            <div class="tab-container" style="display: flex; border-bottom: 2px solid var(--border-color);">
+                <button class="tab-btn active" onclick="switchTab('projects')" style="padding: 0.8rem 1.5rem; border: none; background: none; cursor: pointer; font-size: 1rem; font-weight: bold; color: var(--primary-color); border-bottom: 3px solid var(--primary-color); margin-bottom: -2px;">项目管理</button>
+                <button class="tab-btn" onclick="switchTab('categories')" style="padding: 0.8rem 1.5rem; border: none; background: none; cursor: pointer; font-size: 1rem; font-weight: bold; color: #666;">分类管理</button>
+                <button class="tab-btn" onclick="switchTab('music')" style="padding: 0.8rem 1.5rem; border: none; background: none; cursor: pointer; font-size: 1rem; font-weight: bold; color: #666;">音乐管理</button>
+                <button class="tab-btn" onclick="switchTab('site-config')" style="padding: 0.8rem 1.5rem; border: none; background: none; cursor: pointer; font-size: 1rem; font-weight: bold; color: #666;">网站配置</button>
+            </div>
+        </div>
+        
+        <!-- 项目管理标签页内容 -->
+        <div id="projects-tab" class="tab-content active">
+            <div class="admin-header">
+                <div style="display: flex; gap: 10px; justify-content: flex-end;">
+                    <button class="btn btn-primary" onclick="openModal()">添加项目</button>
+                    <button class="btn" onclick="openPasswordModal()">修改密码</button>
+                    <button class="btn btn-danger" onclick="logout()">退出登录</button>
+                </div>
+            </div>
+            <table class="projects-table">
+                <thead>
+                    <tr>
+                        <th>标题</th>
+                        <th>描述</th>
+                        <th>操作</th>
+                    </tr>
+                </thead>
+                <tbody id="projectsTable">
+                </tbody>
+            </table>
+        </div>
+        
+        <!-- 音乐管理标签页内容 -->
+        <div id="music-tab" class="tab-content" style="display: none;">
+            <div class="admin-header">
+                <div style="display: flex; gap: 10px; justify-content: flex-end;">
+                    <button class="btn btn-primary" onclick="openMusicModal()">上传音乐</button>
+                    <button class="btn" onclick="openPasswordModal()">修改密码</button>
+                    <button class="btn btn-danger" onclick="logout()">退出登录</button>
+                </div>
+            </div>
+            <table class="projects-table">
+                <thead>
+                    <tr>
+                        <th>文件名</th>
+                        <th>状态</th>
+                        <th>操作</th>
+                    </tr>
+                </thead>
+                <tbody id="musicTable">
+                </tbody>
+            </table>
+        </div>
+        
+        <!-- 分类管理标签页内容 -->
+        <div id="categories-tab" class="tab-content" style="display: none;">
+            <div class="admin-header">
+                <div style="display: flex; gap: 10px; justify-content: flex-end;">
+                    <button class="btn btn-primary" onclick="openCategoryModal()">添加分类</button>
+                    <button class="btn" onclick="openPasswordModal()">修改密码</button>
+                    <button class="btn btn-danger" onclick="logout()">退出登录</button>
+                </div>
+            </div>
+            <table class="projects-table">
+                <thead>
+                    <tr>
+                        <th>分类名称</th>
+                        <th>创建时间</th>
+                        <th>操作</th>
+                    </tr>
+                </thead>
+                <tbody id="categoriesTable">
+                </tbody>
+            </table>
+        </div>
+        
+        <!-- 网站配置标签页内容 -->
+        <div id="site-config-tab" class="tab-content" style="display: none;">
+            <div class="admin-header">
+                <div style="display: flex; gap: 10px; justify-content: flex-end;">
+                    <button class="btn" onclick="openPasswordModal()">修改密码</button>
+                    <button class="btn btn-danger" onclick="logout()">退出登录</button>
+                </div>
+            </div>
+            <div class="site-config-form">
+                <h3>网站配置</h3>
+                <form id="siteConfigForm">
+                    <div class="form-group">
+                    <label for="site_title">网站标题</label>
+                    <input type="text" id="site_title" name="site_title" required>
+                </div>
+                <div class="form-group">
+                    <label for="site_subtitle">网站副标题</label>
+                    <input type="text" id="site_subtitle" name="site_subtitle" required>
+                </div>
+                <div class="form-group">
+                    <label for="footer_text">页脚文本</label>
+                    <input type="text" id="footer_text" name="footer_text" required>
+                </div>
+                <div class="form-group">
+                    <label for="site_icon_url">站点图标URL</label>
+                    <input type="url" id="site_icon_url" name="site_icon_url" placeholder="或使用下方上传本地图标">
+                </div>
+                <div class="form-group">
+                    <label for="local_site_icon">上传本地图标</label>
+                    <input type="file" id="local_site_icon" name="local_site_icon" accept="image/*">
+                    <small style="display: block; margin-top: 5px; color: #666;">建议使用.ico格式，尺寸16x16或32x32像素</small>
+                </div>
+                <div class="form-group">
+                    <label for="music_enabled" style="display: flex; align-items: center; gap: 10px; cursor: pointer;">
+                        <input type="checkbox" id="music_enabled" name="music_enabled" style="width: auto; cursor: pointer;">
+                        <span>启用背景音乐</span>
+                    </label>
+                </div>
+                <div class="form-group">
+                    <label for="control_panel_visible" style="display: flex; align-items: center; gap: 10px; cursor: pointer;">
+                        <input type="checkbox" id="control_panel_visible" name="control_panel_visible" style="width: auto; cursor: pointer;">
+                        <span>首页显示控制台按钮</span>
+                    </label>
+                </div>
+                    <div id="site-config-error" style="color: red; margin-bottom: 1rem;"></div>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-success">保存配置</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    
+    <!-- 添加/编辑分类模态框 -->
+    <div id="categoryModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeCategoryModal()">&times;</span>
+            <h3 id="categoryModalTitle">添加分类</h3>
+            <form id="categoryForm">
+                <input type="hidden" id="categoryId">
+                <div class="form-group">
+                    <label for="categoryName">分类名称</label>
+                    <input type="text" id="categoryName" name="categoryName" required>
+                </div>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-success">保存</button>
+                    <button type="button" class="btn" onclick="closeCategoryModal()">取消</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    
+    <!-- 添加/编辑项目模态框 -->
+    <div id="projectModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <h3 id="modalTitle">添加项目</h3>
+            <form id="projectForm">
+                <input type="hidden" id="projectId">
+                <div class="form-group">
+                    <label for="title">标题</label>
+                    <input type="text" id="title" name="title" required>
+                </div>
+                <div class="form-group">
+                    <label for="description">描述</label>
+                    <textarea id="description" name="description" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="image_url">封面图片URL</label>
+                    <input type="text" id="image_url" name="image_url" placeholder="图片项目和视频项目都会使用这里作为封面">
+                </div>
+                <div class="form-group">
+                    <label for="local_image">上传封面图片</label>
+                    <input type="file" id="local_image" name="local_image" accept="image/*">
+                    <small id="image-preview-text" style="display: block; margin-top: 5px; color: #666;"></small>
+                </div>
+                <div class="form-group">
+                    <label for="video_url">视频URL</label>
+                    <input type="text" id="video_url" name="video_url" placeholder="支持 mp4 / webm / ogv 直链，或使用下方上传本地视频">
+                </div>
+                <div class="form-group">
+                    <label for="local_video">上传本地视频</label>
+                    <input type="file" id="local_video" name="local_video" accept="video/mp4,video/webm,video/ogg,.mp4,.webm,.mov,.ogv">
+                    <small id="video-preview-text" style="display: block; margin-top: 5px; color: #666;">视频最大支持 1GB</small>
+                </div>
+                <div class="form-group">
+                    <label for="text_content">文本内容</label>
+                    <textarea id="text_content" name="text_content" placeholder="添加项目的详细文本内容..." rows="6"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="github_url">GitHub URL</label>
+                    <input type="url" id="github_url" name="github_url">
+                </div>
+                <div class="form-group">
+                    <label for="live_url">在线演示URL</label>
+                    <input type="url" id="live_url" name="live_url">
+                </div>
+                <div class="form-group">
+                    <label for="download_url">下载地址URL</label>
+                    <input type="url" id="download_url" name="download_url">
+                </div>
+                <div class="form-group">
+                    <label for="local_download">上传下载文件</label>
+                    <input type="file" id="local_download" name="local_download" accept=".zip,.rar,.7z,.pdf,.doc,.docx,.xls,.xlsx,.ppt,.pptx,.txt,.md,.csv,.json">
+                    <small id="download-preview-text" style="display: block; margin-top: 5px; color: #666;">上传后会自动生成下载地址，前台点击“下载”会直接下载文件</small>
+                </div>
+                <div class="form-group">
+                    <label for="category_id">分类</label>
+                    <select id="category_id" name="category_id">
+                        <option value="">无分类</option>
+                        <!-- 分类选项将通过JavaScript动态添加 -->
+                    </select>
+                </div>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-success">保存</button>
+                    <button type="button" class="btn" onclick="closeModal()">取消</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    
+    <!-- 修改密码模态框 -->
+    <div id="passwordModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closePasswordModal()">&times;</span>
+            <h3>修改密码</h3>
+            <form id="passwordForm">
+                <div class="form-group">
+                    <label for="new_password">新密码</label>
+                    <input type="password" id="new_password" name="new_password" required>
+                </div>
+                <div class="form-group">
+                    <label for="confirm_password">确认新密码</label>
+                    <input type="password" id="confirm_password" name="confirm_password" required>
+                </div>
+                <div id="password-error" style="color: red; margin-bottom: 1rem;"></div>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-success">保存修改</button>
+                    <button type="button" class="btn" onclick="closePasswordModal()">取消</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    
+    <!-- 上传音乐模态框 -->
+    <div id="musicModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeMusicModal()">&times;</span>
+            <h3>上传音乐</h3>
+            <form id="musicForm" enctype="multipart/form-data">
+                <div class="form-group">
+                    <label for="music_file">选择音乐文件</label>
+                    <input type="file" id="music_file" name="file" accept="audio/*" required>
+                    <small style="display: block; margin-top: 5px; color: #666;">支持的格式: MP3, WAV, OGG, AAC, FLAC</small>
+                </div>
+                <div id="music-error" style="color: red; margin-bottom: 1rem;"></div>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-success">上传</button>
+                    <button type="button" class="btn" onclick="closeMusicModal()">取消</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    
+    <script src="/static/js/admin.js"></script>
+    
+    <script>
+        // 标签页切换功能
+        function switchTab(tabName) {
+            // 获取所有标签页按钮和内容
+            const tabBtns = document.querySelectorAll('.tab-btn');
+            const tabContents = document.querySelectorAll('.tab-content');
+            
+            // 移除所有按钮的active类和所有内容的active类
+            tabBtns.forEach(btn => {
+                btn.classList.remove('active');
+                btn.style.color = '#666';
+                btn.style.borderBottom = 'none';
+            });
+            tabContents.forEach(content => {
+                content.classList.remove('active');
+                content.style.display = 'none';
+            });
+            
+            // 为当前点击的按钮添加active类
+            const activeBtn = document.querySelector(`[onclick="switchTab('${tabName}')"]`);
+            activeBtn.classList.add('active');
+            activeBtn.style.color = 'var(--primary-color)';
+            activeBtn.style.borderBottom = '3px solid var(--primary-color)';
+            
+            // 显示对应的标签页内容
+            const activeContent = document.getElementById(`${tabName}-tab`);
+            activeContent.classList.add('active');
+            activeContent.style.display = 'block';
+            
+            // 根据标签页刷新对应数据
+            if (tabName === 'projects') {
+                fetchProjects();
+            } else if (tabName === 'categories') {
+                fetchCategories();
+            } else if (tabName === 'music') {
+                fetchMusic();
+            } else if (tabName === 'site-config') {
+                fetchSiteConfig();
+            }
+        }
+        // 主题切换功能
+        // 从服务器获取当前主题
+        async function fetchCurrentTheme() {
+            try {
+                const response = await fetch('/api/site-config');
+                if (response.ok) {
+                    const config = await response.json();
+                    return config.theme;
+                }
+                return 'fresh';
+            } catch (error) {
+                console.error('获取主题失败:', error);
+                return 'fresh';
+            }
+        }
+        
+        // 保存主题到服务器
+        async function saveThemeToServer(theme) {
+            try {
+                const response = await fetch('/api/site-config', {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ theme: theme })
+                });
+                if (!response.ok) {
+                    throw new Error('保存主题失败');
+                }
+            } catch (error) {
+                console.error('保存主题到服务器失败:', error);
+            }
+        }
+        
+        function changeTheme() {
+            const themeSelect = document.getElementById('theme-select');
+            const themeStyle = document.getElementById('theme-style');
+            const selectedTheme = themeSelect.value;
+            
+            // 更新主题CSS链接
+            themeStyle.href = `/static/css/themes/${selectedTheme}.css`;
+            
+            // 保存主题到服务器
+            saveThemeToServer(selectedTheme);
+        }
+        
+        // 页面加载时从服务器获取当前主题
+        document.addEventListener('DOMContentLoaded', async function() {
+            const currentTheme = await fetchCurrentTheme();
+            const themeSelect = document.getElementById('theme-select');
+            const themeStyle = document.getElementById('theme-style');
+            
+            themeSelect.value = currentTheme;
+            themeStyle.href = `/static/css/themes/${currentTheme}.css`;
+        });
+        
+        // 打开密码修改模态框
+        function openPasswordModal() {
+            const passwordModal = document.getElementById('passwordModal');
+            const passwordError = document.getElementById('password-error');
+            passwordError.textContent = '';
+            document.getElementById('passwordForm').reset();
+            passwordModal.classList.add('show');
+        }
+        
+        // 关闭密码修改模态框
+        function closePasswordModal() {
+            const passwordModal = document.getElementById('passwordModal');
+            passwordModal.classList.remove('show');
+        }
+        
+        // 退出登录
+        function logout() {
+            if (confirm('确定要退出登录吗？')) {
+                window.location.href = '/logout';
+            }
+        }
+        
+        // 处理密码修改表单提交
+        document.getElementById('passwordForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const newPassword = document.getElementById('new_password').value;
+            const confirmPassword = document.getElementById('confirm_password').value;
+            const passwordError = document.getElementById('password-error');
+            
+            // 验证密码
+            if (newPassword !== confirmPassword) {
+                passwordError.textContent = '两次输入的密码不一致';
+                return;
+            }
+            
+            if (newPassword.length < 6) {
+                passwordError.textContent = '密码长度不能少于6位';
+                return;
+            }
+            
+            try {
+                const response = await fetch('/api/change_password', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ new_password: newPassword })
+                });
+                
+                const result = await response.json();
+                
+                if (response.ok) {
+                    alert('密码修改成功');
+                    closePasswordModal();
+                } else {
+                    passwordError.textContent = result.error || '密码修改失败';
+                }
+            } catch (error) {
+                passwordError.textContent = '网络错误，请稍后重试';
+            }
+        });
+        
+        // 点击模态框外部关闭
+        let inlineModalPointerDownTarget = null;
+        window.addEventListener('pointerdown', function(event) {
+            inlineModalPointerDownTarget = event.target;
+        });
+
+        window.onclick = function(event) {
+            const projectModal = document.getElementById('projectModal');
+            const passwordModal = document.getElementById('passwordModal');
+            const musicModal = document.getElementById('musicModal');
+            
+            if (event.target == projectModal && inlineModalPointerDownTarget == projectModal) {
+                closeModal();
+            }
+            if (event.target == passwordModal && inlineModalPointerDownTarget == passwordModal) {
+                closePasswordModal();
+            }
+            if (event.target == musicModal && inlineModalPointerDownTarget == musicModal) {
+                closeMusicModal();
+            }
+            inlineModalPointerDownTarget = null;
+        }
+        
+        // 音乐管理功能
+        // 获取音乐列表
+        async function fetchMusic() {
+            const response = await fetch('/api/music');
+            const musicList = await response.json();
+            renderMusicList(musicList);
+        }
+        
+        // 渲染音乐列表
+        function renderMusicList(musicList) {
+            const musicTable = document.getElementById('musicTable');
+            musicTable.innerHTML = '';
+            
+            musicList.forEach(music => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${music.filename}</td>
+                    <td>${music.is_default ? '默认' : '普通'}</td>
+                    <td class="actions">
+                        ${!music.is_default ? `<button class="btn" onclick="setDefaultMusic(${music.id})">设为默认</button>` : ''}
+                        <button class="btn btn-danger" onclick="deleteMusic(${music.id})">删除</button>
+                    </td>
+                `;
+                musicTable.appendChild(row);
+            });
+        }
+        
+        // 打开音乐上传模态框
+        function openMusicModal() {
+            const musicModal = document.getElementById('musicModal');
+            const musicError = document.getElementById('music-error');
+            musicError.textContent = '';
+            document.getElementById('musicForm').reset();
+            musicModal.classList.add('show');
+        }
+        
+        // 关闭音乐上传模态框
+        function closeMusicModal() {
+            const musicModal = document.getElementById('musicModal');
+            musicModal.classList.remove('show');
+        }
+        
+        // 处理音乐上传表单提交
+        document.getElementById('musicForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const form = document.getElementById('musicForm');
+            const formData = new FormData(form);
+            const musicError = document.getElementById('music-error');
+            
+            try {
+                const response = await fetch('/api/music', {
+                    method: 'POST',
+                    body: formData
+                });
+                
+                if (response.ok) {
+                    const result = await response.json();
+                    alert('音乐上传成功');
+                    closeMusicModal();
+                    fetchMusic();
+                } else {
+                    const result = await response.json();
+                    musicError.textContent = result.error || '音乐上传失败';
+                }
+            } catch (error) {
+                musicError.textContent = '网络错误，请稍后重试';
+            }
+        });
+        
+        // 设置默认音乐
+        async function setDefaultMusic(id) {
+            if (confirm('确定要将此音乐设为默认背景音乐吗？')) {
+                try {
+                    const response = await fetch(`/api/music/${id}/default`, {
+                        method: 'PUT',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        }
+                    });
+                    
+                    if (response.ok) {
+                        alert('默认音乐设置成功');
+                        fetchMusic();
+                    } else {
+                        alert('设置失败');
+                    }
+                } catch (error) {
+                    alert('网络错误，请稍后重试');
+                }
+            }
+        }
+        
+        // 删除音乐
+        async function deleteMusic(id) {
+            if (confirm('确定要删除此音乐吗？')) {
+                try {
+                    const response = await fetch(`/api/music/${id}`, {
+                        method: 'DELETE'
+                    });
+                    
+                    if (response.ok) {
+                        alert('音乐删除成功');
+                        fetchMusic();
+                    } else {
+                        alert('删除失败');
+                    }
+                } catch (error) {
+                    alert('网络错误，请稍后重试');
+                }
+            }
+        }
+        
+        // 页面加载时获取音乐列表和网站配置
+        document.addEventListener('DOMContentLoaded', function() {
+            fetchMusic();
+            fetchSiteConfig();
+            fetchProjects(); // 添加获取项目列表
+        });
+        
+        // 切换到项目标签时获取项目列表
+        function switchToProjectsTab() {
+            fetchProjects();
+        }
+        
+        // 获取网站配置
+        async function fetchSiteConfig() {
+            const response = await fetch('/api/site-config');
+            const config = await response.json();
+            
+            // 填充表单
+            document.getElementById('site_title').value = config.site_title;
+            document.getElementById('site_subtitle').value = config.site_subtitle;
+            document.getElementById('footer_text').value = config.footer_text;
+            document.getElementById('site_icon_url').value = config.site_icon || '';
+            document.getElementById('music_enabled').checked = config.music_enabled;
+            document.getElementById('control_panel_visible').checked = config.control_panel_visible;
+        }
+        
+        // 处理网站配置表单提交
+        document.getElementById('siteConfigForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const site_title = document.getElementById('site_title').value;
+            const site_subtitle = document.getElementById('site_subtitle').value;
+            const footer_text = document.getElementById('footer_text').value;
+            let site_icon = document.getElementById('site_icon_url').value;
+            const music_enabled = document.getElementById('music_enabled').checked;
+            const control_panel_visible = document.getElementById('control_panel_visible').checked;
+            const fileInput = document.getElementById('local_site_icon');
+            const local_site_icon = fileInput.files && fileInput.files[0]; // 安全获取文件
+            const errorElement = document.getElementById('site-config-error');
+            
+            errorElement.textContent = '';
+            
+            try {
+                // 检查是否有本地图标需要上传
+                if (local_site_icon) {
+                    const formData = new FormData();
+                    formData.append('file', local_site_icon);
+                    
+                    // 上传图标
+                    const uploadResponse = await fetch('/api/upload', {
+                        method: 'POST',
+                        body: formData
+                    });
+                    
+                    if (uploadResponse.ok) {
+                        const uploadData = await uploadResponse.json();
+                        site_icon = uploadData.file_url;
+                    } else {
+                        errorElement.textContent = '图标上传失败，请重试';
+                        return;
+                    }
+                }
+                
+                // 如果site_icon为空字符串，设为null
+                if (site_icon === '') {
+                    site_icon = null;
+                }
+                
+                const response = await fetch('/api/site-config', {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        site_title,
+                        site_subtitle,
+                        footer_text,
+                        site_icon,
+                        music_enabled,
+                        control_panel_visible
+                    })
+                });
+                
+                const result = await response.json();
+                
+                if (response.ok) {
+                    alert('网站配置更新成功');
+                } else {
+                    errorElement.textContent = result.error || '配置更新失败';
+                }
+            } catch (error) {
+                console.error('配置保存失败:', error);
+                errorElement.textContent = '保存失败，请检查控制台获取详细错误信息';
+            }
+        });
+    </script>
+</body>
+</html>
